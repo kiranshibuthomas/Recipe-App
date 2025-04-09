@@ -11,13 +11,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<String> categories = [
-    'Breakfast',
-    'Lunch',
-    'Dinner',
-    'Snack',
-    'Dessert',
-    'Side Dish',
+  final List<Map<String, String>> categories = [
+    {'title': 'Breakfast', 'image': 'assets/images/breakfast.jpg'},
+    {'title': 'Lunch', 'image': 'assets/images/lunch.jpg'},
+    {'title': 'Dinner', 'image': 'assets/images/dinner.jpg'},
+    {'title': 'Snack', 'image': 'assets/images/snack.jpg'},
+    {'title': 'Dessert', 'image': 'assets/images/dessert.jpg'},
+    {'title': 'Side Dish', 'image': 'assets/images/side_dish.jpg'},
   ];
 
   RecipieModel? recipeData;
@@ -63,8 +63,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFFFF8E1), // Light yellow
       appBar: AppBar(
         title: const Text('Recipe Categories'),
+        backgroundColor: const Color(0xFFFF7043), // Light orange
         actions: [
           IconButton(
             icon: const Icon(Icons.menu_book),
@@ -76,29 +78,33 @@ class _HomePageState extends State<HomePage> {
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16),
         child: GridView.count(
           crossAxisCount: 2,
-          crossAxisSpacing: 12,
-          mainAxisSpacing: 12,
-          childAspectRatio: 1,
+          crossAxisSpacing: 16,
+          mainAxisSpacing: 16,
           children: categories.map((category) {
             return GestureDetector(
-              onTap: () => navigateToCategory(category),
+              onTap: () => navigateToCategory(category['title']!),
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.deepPurple.shade200,
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Center(
-                  child: Text(
-                    category,
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  image: DecorationImage(
+                    image: AssetImage(category['image']!),
+                    fit: BoxFit.cover,
+                    colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(0.4),
+                      BlendMode.darken,
                     ),
-                    textAlign: TextAlign.center,
+                  ),
+                ),
+                alignment: Alignment.center,
+                child: Text(
+                  category['title']!,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
