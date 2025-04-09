@@ -1,6 +1,6 @@
 name: website1
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: 'none' # Remove this line if you want to publish to pub.dev
 
 version: 1.0.0+1
 
@@ -17,10 +17,11 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.13.1
+
 
 flutter:
   uses-material-design: true
-
   assets:
     - assets/images/breakfast.jpg
     - assets/images/lunch.jpg
@@ -28,3 +29,7 @@ flutter:
     - assets/images/snack.jpg
     - assets/images/dessert.jpg
     - assets/images/side_dish.jpg
+    - assets/icon/app_icon.png
+
+flutter_icons:
+  image_path: "assets/icon/app_icon.png"
